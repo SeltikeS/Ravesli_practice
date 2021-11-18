@@ -1,0 +1,75 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+class PositiveProgression
+{
+private:
+    std::vector<int> m_progression;
+    std::string m_string;
+    
+public:
+    PositiveProgression() 
+    {
+        runProgramm();
+    }
+    
+    void runProgramm()
+    {
+        std::cout << "Enter positive progression of int values\n";
+        std::getline(std::cin, m_string);
+        
+        stringToVector();
+        
+        
+    }
+    
+    void stringToVector()
+    {
+        int string_length = m_string.length();
+        int value = 0;
+        bool error = 0;
+        for(int i = 0; i < string_length; i++)
+        {
+            if((m_string.at(i) == '-') || (m_string.at(i) == '0'))
+            {
+                std::cout << "Please enter only positive values\n";
+                m_progression.clear();
+                error = 1;
+                runProgramm();
+                break;
+            }
+            if(m_string.at(i) == ' ')
+            {
+                m_progression.push_back(value);
+                value = 0;
+            }
+            else
+                {
+                    char ch = m_string.at(i);
+                    value = (value * 10) + (ch - 48);
+                }
+        }
+        
+        if(error == 0)
+            m_progression.push_back(value);
+            
+    }
+    
+    void minValue()
+    {
+        sort(m_progression.begin(), m_progression.end());
+        std::cout << m_progression.at(0);
+    }
+    
+    
+};
+
+int main()
+{
+    PositiveProgression p;
+    p.minValue();
+
+    return 0;
+}

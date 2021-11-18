@@ -1,0 +1,70 @@
+#include <iostream>
+#include <string>
+
+
+// Function check is it IcecreamSandwich
+bool isIcecreamSandwich(std::string s)
+{
+    bool answer = 0;
+    
+    // IcecreamSandwich cant be less then 3 symbols
+    if(s.size() >= 3)
+    {
+        // Begin and end of IcecreamSandwich must be same
+        if(s[0] == s[s.size()-1])
+        {
+            char icecream = 0;
+            char sandwich = 0;
+            
+            int i = 0;
+            int j = s.size()-1;
+            
+            
+            int different_filling = 0;
+            
+            while(i <= j)
+            {
+                // You can't have unequal ends in a sandwich
+                if(s[i] == s[j])
+                {
+                      
+                    sandwich = icecream;
+                    icecream = s[i];
+                    
+                    if(icecream != sandwich)
+                    {
+                        ++different_filling;
+                    }  
+                    
+                    answer = 1;
+                }
+                else
+                {
+                    answer = 0;
+                    break;
+                }
+                ++i;
+                --j;
+            }
+            // You cant have only icecream without sandwich (0) and
+            // you cant have icecream with different filling
+            if(different_filling != 2)
+                answer = 0;
+        }
+    }
+    
+    return answer;
+}
+
+
+int main()
+{
+    std::string s;
+    std::cin >> s;
+    
+    std::cout << std::boolalpha << isIcecreamSandwich(s) << '\n';
+    
+    
+    
+    return 0;
+}

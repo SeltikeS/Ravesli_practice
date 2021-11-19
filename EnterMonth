@@ -1,0 +1,79 @@
+#include <iostream>
+#include <string>
+#include <cassert>
+
+class Month
+{
+public:
+    Month()
+    {
+        m_month = monthList[static_cast<MonthName>(enterMonth()) - 1];
+        std::cout << getName() << '\n';
+    }
+
+    int enterMonth()
+    {
+        std::cout << "Введите номер месяца (число от 1 до 12): ";
+        int number;
+        std::cin >> number;
+        assert(number >= 1 && number <= 12);
+        return number;
+    }
+    
+     std::string getName()
+     {
+        return m_month.name;
+     }
+    
+
+private:   
+    enum MonthName
+    {
+        JANUARY,
+        FEBRUARY,
+        MARCH,
+        APRIL,
+        MAY,
+        JUNE,
+        JULY,
+        AUGUST,
+        SEPTEMBER,
+        OCTOBER,
+        NOVEMBER,
+        DECEMBER,
+        MAX_MONTH
+    };
+    
+    struct MonthData
+    {
+        MonthName id;
+        std::string name;
+    };
+    
+    static MonthData monthList[MAX_MONTH];
+    
+    MonthData m_month;
+};
+
+Month::MonthData Month::monthList[Month::MAX_MONTH] 
+{
+    { JANUARY, "january" },
+    { FEBRUARY, "februaty" },
+    { MARCH, "march" },
+    { APRIL, "april" },
+    { MAY, "may" },
+    { JUNE, "june" },
+    { JULY, "july" },
+    { AUGUST, "august" },
+    { SEPTEMBER, "september" },
+    { OCTOBER, "october" },
+    { NOVEMBER, "november" },
+    { DECEMBER, "december" }
+};
+
+int main()
+{
+    Month m;
+
+    return 0;
+}
